@@ -39,21 +39,25 @@ void loop() {
     if (teststr == "read")
     {
       digitalWrite(LED_Pin, HIGH);          // start measurements
+      // 1st value, channel A, gain=128, as median of 7 individual values
       scale.set_gain(128);
       while (!scale.is_ready()) {}          // Wait until scale ist readay
       value = (int)scale.read_median(7);
       Serial.print(value);
       // Serial.print(random(-pow(2, 23), pow(2, 23)));
       Serial.print(" ");
+      // 2nd value, channel B, gain=32, as median of 7 individual values
       scale.set_gain(32);
       while (!scale.is_ready()) {}          // Wait until scale ist readay
       value = (int)scale.read_median(7);
       Serial.print(value);
       // Serial.print(random(-pow(2, 23), pow(2, 23)));
       Serial.print(" ");
+      // 3rd value, random number
       value = random(0, 10000);
       Serial.print(value/10000, 4);
       Serial.print(" ");
+      // 4th value, random number
       value = random(0, 10000);
       Serial.println(value/10000, 4);
       delay(100);
